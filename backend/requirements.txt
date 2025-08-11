@@ -1,0 +1,6 @@
+google-generativeai
+flask
+flask-cors
+fastapi
+uvicorn
+pydantic
