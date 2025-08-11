@@ -29,14 +29,14 @@ const Estimate = () => {
   const cspOptions = ["AWS", "Azure", "GCP"];
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/regions")
+    fetch("http://13.232.83.252:8000/api/regions")
       .then((res) => res.json())
       .then((data) => setRegionOptions(data))
       .catch((err) => console.error("Failed to load regions", err));
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/user-regions")
+    fetch("http://13.232.83.252:8000/api/user-regions")
       .then((res) => res.json())
       .then((data) => {
         // Ensure data is always an array
@@ -55,7 +55,7 @@ const Estimate = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/project-types")
+    fetch("http://13.232.83.252:8000/api/project-types")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -73,7 +73,7 @@ const Estimate = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/workload-types")
+    fetch("http://13.232.83.252:8000/api/workload-types")
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -99,7 +99,7 @@ const Estimate = () => {
       }
     });
     try {
-      const response = await fetch("http://localhost:8000/api/recommend", {
+      const response = await fetch("http://13.232.83.252:8000/api/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
