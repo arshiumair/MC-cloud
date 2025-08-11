@@ -20,7 +20,7 @@ const CopilotChat = () => {
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/chat", {
+      const response = await fetch("http://13.232.83.252:8000/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
