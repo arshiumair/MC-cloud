@@ -38,12 +38,29 @@ MC-cloud/
 │   ├── public/               # Static assets
 │   └── src/                  # React source code
 │       ├── App.js, App.css   # Main app files
+│       ├── config/           # Centralized configuration (e.g., apiConfig.js)
 │       ├── components/       # Reusable React components
 │       └── pages/            # Main app pages (CopilotChat, Estimate, etc.)
 │
 ├── package.json              # Root-level dev dependencies (e.g., Tailwind)
 └── README.md                 # Project documentation
 ```
+---
+
+## Centralized API Configuration
+
+All frontend API endpoints are managed in a single file: `src/config/apiConfig.js`.
+
+**Example usage:**
+
+```js
+import apiConfig from "../config/apiConfig";
+
+fetch(apiConfig.CHAT, { /* ... */ });
+```
+
+This makes it easy to update API URLs and manage environments (e.g., using environment variables like `REACT_APP_API_BASE_URL`).
+
 
 ---
 
