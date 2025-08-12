@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
+import apiConfig from "../config/apiConfig";
 
 const CopilotChat = () => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const CopilotChat = () => {
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
     try {
-      const response = await fetch("http://13.232.83.252:8000/chat", {
+  const response = await fetch(apiConfig.CHAT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: input }),
