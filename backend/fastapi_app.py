@@ -9,6 +9,7 @@ from pydantic import BaseModel
 
 fastapi_app = FastAPI()
 
+# Enable CORS for all origins (adjust for production)
 fastapi_app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -17,6 +18,7 @@ fastapi_app.add_middleware(
     allow_headers=["*"],
 )
 
+# GET endpoints for data
 @fastapi_app.get("/api/regions")
 def get_regions():
     return regions_data
@@ -33,9 +35,11 @@ def get_project_types():
 def get_workload_types():
     return workload_types
 
+# POST endpoint for recommendations
 class EstimateRequest(BaseModel):
     csp: str
     region: str
+    userBaseRegion: str = ""
     budget: str
     projectType: str
     users: str
@@ -45,25 +49,26 @@ class EstimateRequest(BaseModel):
 async def get_estimate(request: Request):
     data = await request.json()
     prompt = f"""
-    Your are an expert cloud architect. Give me a cloud deployment recommendation based on the following:
+You are an expert cloud architect. Give me a cloud deployment recommendation based on the following:
 
-    Cloud Provider: {data.get('csp')}
-    Region: {data.get('region')}
-    User Base Region: {data.get('userBaseRegion')}
-    Budget: {data.get('budget')}
-    Project Type: {data.get('projectType')}
-    User Load: {data.get('users')}
-    Additional Info: {data.get('description')}
+Cloud Provider: {data.get('csp')}
+Region: {data.get('region')}
+User Base Region: {data.get('userBaseRegion')}
+Budget: {data.get('budget')}
+Project Type: {data.get('projectType')}
+User Load: {data.get('users')}
+Additional Info: {data.get('description')}
 
-    Respond in simple language with: 
-    - recommended services 
-    - expected monthly cost 
-    - performance overview 
-    - other tips.
-    """
+Respond in simple language with: 
+- recommended services 
+- expected monthly cost 
+- performance overview 
+- other tips.
+"""
     gemini_response = get_gemini_response(prompt)
     return {"response": gemini_response}
 
+# POST endpoint for chat
 @fastapi_app.post("/chat")
 async def chat(request: Request):
     data = await request.json()
