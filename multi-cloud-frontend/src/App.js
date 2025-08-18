@@ -56,7 +56,8 @@ function App() {
             <Route path="/copilot-chat" element={<CopilotChat />} />
           </Routes>
         </div>
-        <Footer />
+        {/* Only show Footer if not on /copilot-chat */}
+        {window.location.pathname !== "/copilot-chat" && <Footer />}
       </div>
     </Router>
   );
