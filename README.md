@@ -172,6 +172,3 @@ npm install
 
 ---
 
-## License
-
-This project is open-source and under the [MIT License](https://github.com/arshiumair/MC-cloud/blob/master/LICENSE)
